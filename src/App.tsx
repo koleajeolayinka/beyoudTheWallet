@@ -133,21 +133,21 @@ export default function App() {
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-4">
               <div className="flex flex-col items-end">
-                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Back-Office Status</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</span>
                 <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${marketData ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-                  <span className="text-xs font-bold text-slate-300">{marketData ? 'Connected' : 'Disconnected'}</span>
+                  <div className={`w-2 h-2 rounded-full ${marketData ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
+                  <span className="text-xs font-bold text-white">{marketData ? 'Connected' : 'Offline'}</span>
                 </div>
               </div>
               <Separator orientation="vertical" className="h-8 bg-white/10" />
               {marketData && (
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Market Risk</p>
-                    <p className={`text-xs font-black ${marketData.risk_level === 'High' ? 'text-red-400' : 'text-emerald-400'}`}>{marketData.risk_level}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Market Risk</p>
+                    <p className={`text-xs font-black ${marketData.risk_level.includes('High') ? 'text-red-400' : 'text-emerald-400'}`}>{marketData.risk_level}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Base Rate</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Base Rate</p>
                     <p className="text-xs font-black text-solar">{marketData.base_rate}</p>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export default function App() {
                     </div>
                     <div>
                       <h2 className="text-3xl font-black tracking-tighter text-white mb-2">Initialize TrustPulse</h2>
-                      <p className="text-slate-400 max-w-md mx-auto text-sm leading-relaxed">
+                      <p className="text-slate-300 max-w-md mx-auto text-sm leading-relaxed">
                         Upload your financial data to generate a premium alternative credit score for the informal economy.
                       </p>
                     </div>
@@ -246,7 +246,7 @@ export default function App() {
                     </div>
                     <div className="text-center">
                       <h3 className="text-xl font-bold text-white mb-2">Analyzing Invisible Data</h3>
-                      <p className="text-slate-500 text-xs uppercase tracking-[0.3em]">Extracting Payment Frequency</p>
+                      <p className="text-slate-300 text-xs uppercase tracking-[0.3em]">Extracting Payment Frequency</p>
                     </div>
                   </motion.div>
                 ) : (
@@ -287,24 +287,24 @@ export default function App() {
                     {/* Content */}
                     <div className="space-y-8 text-left">
                       <div>
-                        <h4 className="text-[10px] font-black text-forest-light uppercase tracking-[0.3em] mb-3 opacity-60">The Verdict</h4>
+                        <h4 className="text-[10px] font-black text-solar uppercase tracking-[0.3em] mb-3 opacity-80">The Verdict</h4>
                         <p className="text-xl font-bold text-white leading-tight italic">"{result.verdict}"</p>
                       </div>
                       
                       <div className="grid grid-cols-1 gap-4">
-                        <div className="p-4 glass rounded-2xl border-white/5">
+                        <div className="p-4 glass rounded-2xl border-white/10">
                           <div className="flex items-center gap-2 mb-2">
                             <Info className="w-3 h-3 text-solar" />
-                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Mentor Advice</span>
+                            <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Mentor Advice</span>
                           </div>
-                          <p className="text-sm font-medium text-slate-300">{result.advice}</p>
+                          <p className="text-sm font-medium text-white">{result.advice}</p>
                         </div>
-                        <div className="p-4 glass rounded-2xl border-white/5">
+                        <div className="p-4 glass rounded-2xl border-white/10">
                           <div className="flex items-center gap-2 mb-2">
                             <TrendingUp className="w-3 h-3 text-emerald-400" />
-                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Recommended Action</span>
+                            <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Recommended Action</span>
                           </div>
-                          <p className="text-sm font-medium text-slate-300">{result.action}</p>
+                          <p className="text-sm font-medium text-white">{result.action}</p>
                         </div>
                       </div>
                     </div>
@@ -315,10 +315,10 @@ export default function App() {
           </Card>
 
           {/* 2. Data Ingestion Card (Small Top Right) */}
-          <Card className="md:col-span-4 md:row-span-2 glass border-white/5 overflow-hidden">
+          <Card className="md:col-span-4 md:row-span-2 glass border-white/10 overflow-hidden">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-500">Data Source</CardTitle>
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-300">Data Source</CardTitle>
                 <Smartphone className="w-4 h-4 text-solar" />
               </div>
             </CardHeader>
@@ -328,22 +328,22 @@ export default function App() {
                 className={`
                   aspect-square rounded-2xl border-2 border-dashed transition-all cursor-pointer overflow-hidden
                   flex flex-col items-center justify-center gap-2
-                  ${image ? 'border-solar/50 bg-solar/5' : 'border-white/10 hover:border-solar/30 hover:bg-white/5'}
+                  ${image ? 'border-solar/50 bg-solar/5' : 'border-white/20 hover:border-solar/30 hover:bg-white/5'}
                 `}
               >
                 {image ? (
-                  <img src={image} className="w-full h-full object-cover opacity-60" />
+                  <img src={image} className="w-full h-full object-cover opacity-80" />
                 ) : (
                   <>
-                    <Upload className="w-5 h-5 text-slate-600" />
-                    <span className="text-[10px] font-bold text-slate-600 uppercase">Drop Evidence</span>
+                    <Upload className="w-5 h-5 text-slate-400" />
+                    <span className="text-[10px] font-bold text-slate-400 uppercase">Drop Evidence</span>
                   </>
                 )}
                 <input type="file" ref={fileInputRef} onChange={handleImageUpload} className="hidden" accept="image/*" />
               </div>
               
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 uppercase">
+                <div className="flex items-center justify-between text-[10px] font-bold text-slate-300 uppercase">
                   <span>Community Vouching</span>
                   <span>{vouchCount} Members</span>
                 </div>
@@ -366,10 +366,10 @@ export default function App() {
           </Card>
 
           {/* 3. Live Feed Card (Bottom Right) */}
-          <Card className="md:col-span-4 md:row-span-2 glass border-white/5 overflow-hidden">
+          <Card className="md:col-span-4 md:row-span-2 glass border-white/10 overflow-hidden">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-500">Live Vouch Feed</CardTitle>
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-300">Live Vouch Feed</CardTitle>
                 <Users className="w-4 h-4 text-emerald-400" />
               </div>
             </CardHeader>
@@ -383,17 +383,17 @@ export default function App() {
                     { name: "Sister Rose", time: "3h ago", type: "Trade Vouch" },
                     { name: "Baba J", time: "5h ago", type: "Community Vouch" },
                   ].map((vouch, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
+                    <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-forest/40 flex items-center justify-center text-[10px] font-bold">
+                        <div className="w-8 h-8 rounded-full bg-forest/40 flex items-center justify-center text-[10px] font-bold text-white">
                           {vouch.name[0]}
                         </div>
                         <div>
                           <p className="text-xs font-bold text-white">{vouch.name}</p>
-                          <p className="text-[10px] text-slate-500">{vouch.type}</p>
+                          <p className="text-[10px] text-slate-400">{vouch.type}</p>
                         </div>
                       </div>
-                      <span className="text-[10px] font-bold text-slate-600">{vouch.time}</span>
+                      <span className="text-[10px] font-bold text-slate-400">{vouch.time}</span>
                     </div>
                   ))}
                 </div>
@@ -402,10 +402,10 @@ export default function App() {
           </Card>
 
           {/* 4. Market Insights (Small Bottom Left) */}
-          <Card className="md:col-span-4 md:row-span-1 glass border-white/5 overflow-hidden">
+          <Card className="md:col-span-4 md:row-span-1 glass border-white/10 overflow-hidden">
             <CardContent className="p-6 flex items-center justify-between h-full">
               <div className="space-y-1">
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Market Liquidity</p>
+                <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Market Liquidity</p>
                 <p className="text-xl font-black text-white">Stable</p>
               </div>
               <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center">
@@ -415,11 +415,11 @@ export default function App() {
           </Card>
 
           {/* 5. Vision Log (Small Bottom Left) */}
-          <Card className="md:col-span-4 md:row-span-1 glass border-white/5 overflow-hidden">
+          <Card className="md:col-span-4 md:row-span-1 glass border-white/10 overflow-hidden">
             <CardContent className="p-6 flex items-center justify-between h-full">
               <div className="space-y-1">
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Vision Log</p>
-                <p className="text-xs font-mono text-slate-400 truncate max-w-[180px]">
+                <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Vision Log</p>
+                <p className="text-xs font-mono text-slate-200 truncate max-w-[180px]">
                   {result?.incomeConsistency || 'Awaiting Data...'}
                 </p>
               </div>

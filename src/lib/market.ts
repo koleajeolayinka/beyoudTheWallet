@@ -4,15 +4,8 @@ export interface MarketData {
 }
 
 export async function fetchMarketData(): Promise<MarketData | null> {
-  let URL = (import.meta as any).env.VITE_APPS_SCRIPT_URL;
-  
-  // Fallback to the provided real URL if env is missing or placeholder
-  if (!URL || URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
-    URL = "https://script.google.com/macros/s/AKfycbz8jPXlnCjWQGaq9eSCS8HaXxGceaq290986nmLsHmV9JeHz0gAKKekmI2MdDuXyVt5ag/exec";
-  }
-  
   try {
-    const response = await fetch(URL);
+    const response = await fetch("/api/market-data");
     if (!response.ok) throw new Error("Failed to fetch market data");
     const data = await response.json();
     
