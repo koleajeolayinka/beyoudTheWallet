@@ -48,7 +48,26 @@ export default function App() {
 
   const loadMarketData = async () => {
     const data = await fetchMarketData();
-    setMarketData(data);
+    if (data) {
+      setMarketData(data);
+    } else {
+      // Fallback to demo data if fetch fails
+      setMarketData({
+        risk_level: "Medium (Demo)",
+        base_rate: "15% (Demo)"
+      });
+    }
+  };
+
+  const isConfigMissing = !(import.meta as any).env.VITE_APPS_SCRIPT_URL || 
+                          (import.meta as any).env.VITE_APPS_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+
+  const enableDemoMode = () => {
+    setMarketData({
+      risk_level: "Medium (Demo)",
+      base_rate: "12.5% (Demo)"
+    });
+    setError(null);
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,15 +161,27 @@ export default function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-10">
-        {!marketData && (
-          <Alert className="mb-8 glass border-solar/20 bg-solar/5 text-solar">
-            <AlertCircle className="h-5 w-5" />
-            <AlertTitle className="font-black uppercase tracking-widest text-sm">Admin Notice</AlertTitle>
-            <AlertDescription className="text-sm opacity-90">
-              Back-Office Context is missing. Please check the <strong>.env</strong> configuration (VITE_APPS_SCRIPT_URL).
-            </AlertDescription>
-          </Alert>
-        )}
+          {isConfigMissing && !result && (
+            <Alert className="mb-8 glass border-solar/20 bg-solar/5 text-solar flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 shrink-0" />
+                <div>
+                  <AlertTitle className="font-black uppercase tracking-widest text-sm">Configuration Notice</AlertTitle>
+                  <AlertDescription className="text-sm opacity-90">
+                    Live Back-Office is not configured. Using internal fallback for demo purposes.
+                  </AlertDescription>
+                </div>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => fileInputRef.current?.click()}
+                className="border-solar/30 text-solar hover:bg-solar hover:text-forest font-bold text-[10px] uppercase tracking-widest shrink-0"
+              >
+                Start Analysis
+              </Button>
+            </Alert>
+          )}
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
